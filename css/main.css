@@ -1,0 +1,598 @@
+:root {
+    --alkali-metal: #ff8a65;
+    --alkaline-earth: #ffb74d;
+    --transition-metal: #90caf9;
+    --post-transition: #a5d6a7;
+    --metalloid: #80deea;
+    --nonmetal: #ef9a9a;
+    --halogen: #ce93d8;
+    --noble-gas: #9fa8da;
+    --lanthanide: #b39ddb;
+    --actinide: #f48fb1;
+    --unknown: #e0e0e0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.view-toggle button {
+    padding: 8px 16px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.view-toggle button.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.category-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    grid-gap: 3px;
+    margin-bottom: 20px;
+}
+
+.placeholder {
+    grid-column: span 1;
+    visibility: hidden;
+}
+
+.lanthanide-actinide-row {
+    margin-top: 20px;
+}
+
+#element-details {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-top: 30px;
+    display: none;
+}
+
+#element-details.active {
+    display: block;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.detail-symbol {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: white;
+}
+
+.detail-title {
+    flex-grow: 1;
+}
+
+.detail-title h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.detail-title p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.detail-item h3 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.detail-item p {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+}
+
+.tab.active {
+    border-bottom-color: #2196F3;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.gradient-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    display: none;
+}
+
+.gradient-legend.active {
+    display: flex;
+}
+
+.gradient-legend h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.gradient-bar {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #2196F3, #FFEB3B, #F44336);
+    border-radius: 4px;
+    margin: 0 10px;
+}
+
+.gradient-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 5px 10px 0;
+}
+
+@media (max-width: 768px) {
+    #periodic-table {
+        grid-gap: 2px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .category-legend {
+        margin-top: 15px;
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detail-symbol {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+}
+
+.element {
+    background-color: white;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+.element:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.element.active {
+    box-shadow: 0 0 0 3px #2196F3, 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.element-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* Prevent text overlap in different views */
+.property-view .element .element-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+}
+
+.property-view .atomic-number {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-size: 0.6rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+.property-view .symbol {
+    font-size: 1rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+.property-view .name,
+.property-view .mass {
+    display: none;
+}
+
+.property-view .value {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 1px 0;
+    border-radius: 2px;
+}
+
+/* When in standard view, show all details */
+#periodic-table:not(.property-view) .element .name {
+    display: block;
+}
+
+#periodic-table:not(.property-view) .element .mass {
+    display: block;
+}
+
+.atomic-number {
+    font-size: 0.7rem;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+
+.symbol {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.name {
+    font-size: 0.55rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    max-width: 100%;
+}
+
+.mass {
+    font-size: 0.6rem;
+    color: #666;
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    .symbol {
+        font-size: 1rem;
+    }
+    
+    .name {
+        font-size: 0.5rem;
+    }
+    
+    .mass, .atomic-number {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .symbol {
+        font-size: 0.9rem;
+    }
+    
+    .name {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .mass {
+        display: none;
+    }
+    
+    .symbol {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .atomic-number {
+        font-size: 0.4rem;
+    }
+    
+    .symbol {
+        font-size: 0.7rem;
+    }
+}
+
+
+/* General mobile responsiveness improvements */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    .controls {
+        gap: 10px;
+    }
+    
+    .view-toggle {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        justify-content: flex-start;
+    }
+    
+    .view-toggle button {
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .category-legend {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .legend-item {
+        margin-right: 10px;
+        font-size: 0.75rem;
+    }
+    
+    .element {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+    
+    .element:hover {
+        transform: scale(1.03);
+    }
+    
+    #element-details {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .detail-header {
+        margin-bottom: 15px;
+    }
+    
+    .tabs {
+        margin-bottom: 15px;
+    }
+    
+    .tab {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    header p {
+        font-size: 0.8rem;
+    }
+    
+    #periodic-table {
+        grid-gap: 2px;
+    }
+    
+    .element-inner {
+        padding: 2px;
+    }
+    
+    .atomic-number {
+        font-size: 0.5rem;
+    }
+    
+    .symbol {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+    }
+    
+    .detail-symbol {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .detail-title h2 {
+        font-size: 1.5rem;
+    }
+    
+    .detail-title p {
+        font-size: 1rem;
+    }
+    
+    .detail-item {
+        padding: 8px;
+    }
+    
+    .detail-item h3 {
+        font-size: 0.8rem;
+    }
+    
+    .detail-item p {
+        font-size: 1rem;
+    }
+    
+    .tab {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Improvement for gradient legend */
+.gradient-legend {
+    padding: 8px;
+    margin: 8px 0 15px;
+}
+
+.gradient-legend h3 {
+    font-size: 0.9rem;
+}
+
+.gradient-bar {
+    height: 15px;
+}
+
+.gradient-labels {
+    font-size: 0.7rem;
+}
+
+/* Touch-friendly styles for all interactive elements */
+button, .element, .tab, .orbital, .property-bar {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Add smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}

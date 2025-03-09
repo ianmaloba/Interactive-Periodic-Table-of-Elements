@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Periodic Table of Elements</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/element-styles.css">
+    <link rel="stylesheet" href="css/visualizations.css">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Periodic Table of Elements</h1>
+            <p>Click on elements to explore their properties and electron configurations</p>
+        </header>
+
+        <div class="controls">
+            <div class="view-toggle">
+                <button id="standard-view" class="active">Standard View</button>
+                <button id="electronegativity-view">Electronegativity</button>
+                <button id="atomic-radius-view">Atomic Radius</button>
+                <button id="ionization-energy-view">Ionization Energy</button>
+            </div>
+
+            <div class="category-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--alkali-metal);"></div>
+                    <span>Alkali Metals</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--alkaline-earth);"></div>
+                    <span>Alkaline Earth Metals</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--transition-metal);"></div>
+                    <span>Transition Metals</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--post-transition);"></div>
+                    <span>Post-Transition Metals</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--metalloid);"></div>
+                    <span>Metalloids</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--nonmetal);"></div>
+                    <span>Nonmetals</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--halogen);"></div>
+                    <span>Halogens</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--noble-gas);"></div>
+                    <span>Noble Gases</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--lanthanide);"></div>
+                    <span>Lanthanides</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--actinide);"></div>
+                    <span>Actinides</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="gradient-legend" id="gradient-legend">
+            <h3 id="gradient-title">Electronegativity</h3>
+            <div class="gradient-bar"></div>
+            <div class="gradient-labels">
+                <span id="min-value">Low</span>
+                <span id="max-value">High</span>
+            </div>
+        </div>
+
+        <div id="periodic-table"></div>
+
+        <div id="element-details">
+            <div class="detail-header">
+                <div class="detail-symbol" id="detail-symbol-box">H</div>
+                <div class="detail-title">
+                    <h2 id="detail-name">Hydrogen</h2>
+                    <p id="detail-category">Nonmetal</p>
+                </div>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <h3>Atomic Number</h3>
+                    <p id="detail-atomic-number">1</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Atomic Mass</h3>
+                    <p id="detail-atomic-mass">1.008 u</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Electron Configuration</h3>
+                    <p id="detail-electron-config">1s¹</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Electronegativity</h3>
+                    <p id="detail-electronegativity">2.20</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Atomic Radius</h3>
+                    <p id="detail-atomic-radius">53 pm</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Ionization Energy</h3>
+                    <p id="detail-ionization-energy">13.598 eV</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Melting Point</h3>
+                    <p id="detail-melting-point">-259.16 °C</p>
+                </div>
+                <div class="detail-item">
+                    <h3>Boiling Point</h3>
+                    <p id="detail-boiling-point">-252.87 °C</p>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="atomic-structure">Atomic Structure</div>
+                <div class="tab" data-tab="hybridization">Hybridization</div>
+                <div class="tab" data-tab="properties">Properties</div>
+                <div class="tab" data-tab="applications">Applications</div>
+            </div>
+
+            <div class="tab-content active" id="atomic-structure">
+                <div class="visualization">
+                    <div class="atomic-model" id="atomic-model">
+                        <div class="nucleus" id="nucleus">1</div>
+                    </div>
+                </div>
+                <h3>Electron Configuration</h3>
+                <p id="electron-config-detail">The electron configuration of hydrogen is 1s¹. This means it has one electron in the first energy level, specifically in the s orbital.</p>
+            </div>
+
+            <div class="tab-content" id="hybridization">
+                <div class="visualization">
+                    <div class="hybridization-container" id="hybridization-container">
+                        <!-- Content will be dynamically generated -->
+                    </div>
+                </div>
+                <h3>Hybridization Information</h3>
+                <p id="hybridization-detail">Hydrogen typically forms bonds using its 1s orbital. In molecules like methane (CH₄), carbon undergoes sp³ hybridization while hydrogen uses its unhybridized 1s orbital.</p>
+            </div>
+
+            <div class="tab-content" id="properties">
+                <div class="visualization">
+                    <div id="properties-visualization">
+                        <!-- Content will be dynamically generated -->
+                    </div>
+                </div>
+                <h3>Key Properties</h3>
+                <p id="properties-detail">Hydrogen is the lightest element. Under standard conditions, hydrogen is a colorless, odorless, tasteless, non-toxic, nonmetallic, highly combustible gas. It's the most abundant chemical substance in the universe.</p>
+            </div>
+
+            <div class="tab-content" id="applications">
+                <h3>Common Applications</h3>
+                <ul id="applications-list">
+                    <li>Hydrogen is used in the Haber process to produce ammonia</li>
+                    <li>It's used as a clean fuel source in hydrogen fuel cells</li>
+                    <li>Used in the production of hydrochloric acid</li>
+                    <li>Used as a reducing agent in many industrial processes</li>
+                    <li>Used in the hydrogenation of fats and oils</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS files -->
+    <script src="js/elements-data.js"></script>
+    <script src="js/table-builder.js"></script>
+    <script src="js/visualizations.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+/* visualizations.css - Styles for atomic and hybridization visualizations */
+
+/* Visualization section */
+.visualization {
+    height: 300px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Atomic model visualization */
+.atomic-model {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.nucleus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: #f44336;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(244, 67, 54, 0.6);
+    z-index: 10;
+}
+
+.electron-shell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(33, 150, 243, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.electron {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.8);
+}
+
+/* Hybridization visualization */
+.hybridization-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.orbital {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 15px;
+    border-radius: 50%;
+    background-color: rgba(33, 150, 243, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.orbital:hover {
+    transform: scale(1.1);
+}
+
+.orbital.hybrid {
+    background-color: rgba(156, 39, 176, 0.2);
+    border: 2px solid rgba(156, 39, 176, 0.5);
+}
+
+.orbital-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: center;
+}
+
+.properties-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* Property chart - holds all bars */
+.property-chart {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 20px 10px;
+    border-bottom: 2px solid #ccc; /* Add a baseline */
+    position: relative;
+}
+
+/* Individual property bar */
+.property-bar {
+    flex: 1;
+    margin: 0 10px;
+    background: linear-gradient(to top, #2196F3, #8BC34A);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    min-width: 40px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.property-bar:hover {
+    transform: scale(1.05);
+    z-index: 5;
+}
+
+/* Property label at the bottom of the bar */
+.property-label {
+    position: absolute;
+    bottom: -35px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #333;
+    transform: rotate(45deg);
+    transform-origin: left top;
+    white-space: nowrap;
+}
+
+/* Property value at the top of the bar */
+.property-value {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: -25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 0;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+/* Add measurement units */
+.property-unit {
+    font-size: 0.7rem;
+    font-weight: normal;
+    color: #666;
+}
+
+/* Add grid lines for better readability */
+.grid-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border-top: 1px dashed #ddd;
+    z-index: 1;
+}
+
+.grid-label {
+    position: absolute;
+    left: -35px;
+    font-size: 0.7rem;
+    color: #666;
+}
+
+/* Electron animation path */
+.electron-path {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(33, 150, 243, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .visualization {
+        height: 280px;
+    }
+    
+    .atomic-model {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .nucleus {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .orbital {
+        width: 50px;
+        height: 50px;
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .visualization {
+        height: 250px;
+    }
+    
+    .atomic-model {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .nucleus {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .electron {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .orbital {
+        width: 45px;
+        height: 45px;
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+    
+    .orbital-label {
+        font-size: 0.7rem;
+        bottom: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .visualization {
+        height: 220px;
+    }
+    
+    .atomic-model {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .nucleus {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+    
+    .electron {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .orbital {
+        width: 35px;
+        height: 35px;
+        margin: 0 5px;
+        font-size: 0.8rem;
+    }
+    
+    .property-bar {
+        max-width: 40px;
+        margin: 0 3px;
+    }
+    
+    .property-label {
+        font-size: 0.6rem;
+    }
+    
+    .property-value {
+        font-size: 0.6rem;
+    }
+}
+
+/* Animation effects for hybridization */
+@keyframes hybridize {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.orbital.hybrid {
+    animation: hybridize 3s infinite ease-in-out;
+}
+
+/* Electron glow effect */
+.electron::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(33, 150, 243, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+}
+
+/* Energy level colors for electron shells */
+.electron-shell:nth-child(2) {
+    border-color: rgba(33, 150, 243, 0.5);
+}
+
+.electron-shell:nth-child(3) {
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.electron-shell:nth-child(4) {
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.electron-shell:nth-child(5) {
+    border-color: rgba(255, 87, 34, 0.5);
+}
+
+.electron-shell:nth-child(6) {
+    border-color: rgba(156, 39, 176, 0.5);
+}
+
+.electron-shell:nth-child(7) {
+    border-color: rgba(233, 30, 99, 0.5);
+}
+
+.electron-shell:nth-child(8) {
+    border-color: rgba(0, 188, 212, 0.5);
+}
+
+
+/* Applications tab styling */
+#applications {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#applications h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+#applications-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+#applications-list li {
+    background-color: white;
+    padding: 12px 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+#applications-list li:before {
+    content: '•';
+    color: #2196F3;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+#applications-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 767px) {
+    #applications-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Section headings and paragraph styling */
+.tab-content h3 {
+    margin: 15px 0 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-content p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Add a subtle card effect to text sections */
+#electron-config-detail, 
+#hybridization-detail, 
+#properties-detail {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+#electron-config-detail:hover, 
+#hybridization-detail:hover, 
+#properties-detail:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+}
+
+
+/* Make visualizations responsive and scrollable if needed */
+.visualization {
+    overflow: auto;
+    position: relative;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+}
+
+.visualization:active {
+    cursor: grabbing;
+}
+
+.atomic-model, 
+.hybridization-container, 
+.properties-container {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Enhance the orbital containers to be more responsive */
+.hybridization-container > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Make orbital more responsive */
+.orbital {
+    flex-shrink: 0;
+    margin: 10px;
+}
+
+/* Property Chart Responsive Improvements */
+.property-chart {
+    min-width: 350px;
+    padding-bottom: 30px;
+}
+
+/* media queries for responsiveness */
+@media (max-width: 576px) {
+    .visualization {
+        height: 250px;
+    }
+
+    .atomic-model {
+        transform: scale(0.85);
+        transform-origin: center center;
+    }
+
+    .orbital {
+        width: 40px;
+        height: 40px;
+        font-size: 0.7rem;
+    }
+
+    .orbital-label {
+        font-size: 0.6rem;
+        bottom: -18px;
+    }
+
+    .property-label {
+        transform: rotate(60deg);
+        bottom: -20px;
+        font-size: 0.6rem;
+    }
+}
