@@ -149,6 +149,8 @@
                 <div class="tab active" data-tab="atomic-structure">Atomic Structure</div>
                 <div class="tab" data-tab="hybridization">Hybridization</div>
                 <div class="tab" data-tab="properties">Properties</div>
+                <div class="tab" data-tab="reactions">Reactions</div>
+                <div class="tab" data-tab="3d-model">3D Model</div>
                 <div class="tab" data-tab="applications">Applications</div>
             </div>
 
@@ -180,6 +182,37 @@
                 </div>
                 <h3>Key Properties</h3>
                 <p id="properties-detail">Hydrogen is the lightest element. Under standard conditions, hydrogen is a colorless, odorless, tasteless, non-toxic, nonmetallic, highly combustible gas. It's the most abundant chemical substance in the universe.</p>
+            </div>
+
+            <div class="tab-content" id="reactions">
+                <h3>Key Reactions</h3>
+                <div class="reactions-container" id="reactions-container">
+                    <!-- Content will be dynamically generated -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="3d-model">
+                <div class="visualization">
+                    <div id="3d-container" class="model-container">
+                        <!-- 3D visualization will be rendered here -->
+                    </div>
+                </div>
+                <div class="model-controls">
+                    <div class="control-group">
+                        <label for="model-selector">Select Structure:</label>
+                        <select id="model-selector">
+                            <option value="atom">Atomic Model</option>
+                            <option value="molecule">Common Molecule</option>
+                            <option value="crystal">Crystal Structure</option>
+                        </select>
+                    </div>
+                    <div class="control-buttons">
+                        <button id="rotate-toggle">Pause Rotation</button>
+                        <button id="reset-camera">Reset View</button>
+                    </div>
+                </div>
+                <h3>3D Visualization</h3>
+                <p id="3d-model-detail">Explore the 3D structure of the atom and common molecules containing this element. Drag to rotate, scroll to zoom, and use the controls to change view options.</p>
             </div>
 
             <div class="tab-content" id="applications">
@@ -341,6 +374,8 @@
 
     <!-- JS files -->
     <script src="js/navbar-modal.js"></script>
+    <script src="js/3d-model.js"></script>
+    <script src="js/reactions.js"></script>
     <script src="js/elements-data.js"></script>
     <script src="js/table-builder.js"></script>
     <script src="js/visualizations.js"></script>

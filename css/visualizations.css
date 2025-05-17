@@ -533,3 +533,333 @@
         font-size: 0.6rem;
     }
 }
+
+/* Reactions tab styling */
+.reactions-container {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.reaction-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reaction-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.reaction-header {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.reaction-body {
+    padding: 15px;
+}
+
+.reaction-equation {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.reaction-description {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.reaction-conditions {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.reaction-conditions h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.reaction-conditions ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+}
+
+.reaction-applications {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Reaction elements styling */
+.element-symbol {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.reaction-arrow {
+    margin: 0 10px;
+    color: #555;
+}
+
+.reaction-plus {
+    margin: 0 5px;
+    color: #555;
+}
+
+.reaction-state {
+    font-size: 0.8em;
+    vertical-align: sub;
+    color: #666;
+}
+
+/* Dark mode support */
+.dark-mode .reactions-container {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .reaction-card {
+    background-color: #333;
+}
+
+.dark-mode .reaction-equation {
+    background-color: #222;
+    color: #ddd;
+}
+
+.dark-mode .reaction-description {
+    color: #ccc;
+}
+
+.dark-mode .reaction-conditions {
+    background-color: #222;
+}
+
+.dark-mode .reaction-conditions h4 {
+    color: #aaa;
+}
+
+.dark-mode .reaction-applications {
+    color: #aaa;
+}
+
+/* Responsive styles for reactions */
+@media (max-width: 768px) {
+    .reaction-equation {
+        font-size: 1rem;
+        padding: 8px;
+    }
+    
+    .reaction-header {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+    
+    .reaction-body {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reaction-equation {
+        font-size: 0.9rem;
+    }
+    
+    .reaction-conditions {
+        padding: 8px;
+    }
+    
+    .reaction-conditions h4 {
+        font-size: 0.8rem;
+    }
+    
+    .reaction-conditions ul {
+        font-size: 0.8rem;
+    }
+}
+
+/* 3D Model tab styling */
+.model-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: radial-gradient(circle, #2c3e50, #1a1a2e);
+}
+
+.model-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.control-group select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    min-width: 150px;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.control-buttons button {
+    padding: 8px 12px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-buttons button:hover {
+    background-color: #1976D2;
+}
+
+/* Loading indicator for 3D model */
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.loading-spinner {
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top: 5px solid #2196F3;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Legend for 3D model elements */
+.model-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.legend-element {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+/* Help overlay for 3D controls */
+.controls-help {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* Dark mode support */
+.dark-mode .model-controls {
+    background-color: #333;
+}
+
+.dark-mode .control-group label {
+    color: #ddd;
+}
+
+.dark-mode .control-group select {
+    background-color: #444;
+    border-color: #555;
+    color: #eee;
+}
+
+.dark-mode .controls-help {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive styles for model controls */
+@media (max-width: 768px) {
+    .model-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .control-group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .control-group select {
+        width: 100%;
+    }
+    
+    .control-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .controls-help {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+}

@@ -27,6 +27,14 @@ function showElementDetails(element) {
     
     // Scroll to the details
     elementDetails.scrollIntoView({ behavior: 'smooth' });
+
+    updateReactionsTab(element);
+    
+    // Update the 3D model if the tab is active
+    const is3DTabActive = document.querySelector('.tab[data-tab="3d-model"]').classList.contains('active');
+    if (is3DTabActive) {
+        update3DModel(element);
+    }
 }
 
 // Set up view toggle buttons
