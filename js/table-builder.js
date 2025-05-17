@@ -85,7 +85,14 @@ function updateTableView(view) {
     
     // Hide gradient legend by default
     gradientLegend.classList.remove('active');
-    
+
+    // IMPORTANT: Remove any value elements when switching to standard view
+    if (view === 'standard') {
+        document.querySelectorAll('.element .value').forEach(valueElement => {
+            valueElement.remove();
+        });
+    }
+        
     elementDivs.forEach(el => {
         const atomicNumber = parseInt(el.dataset.atomicNumber);
         const element = elements.find(e => e.number === atomicNumber);
