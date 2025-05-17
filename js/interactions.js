@@ -35,6 +35,8 @@ function showElementDetails(element) {
     if (is3DTabActive) {
         update3DModel(element);
     }
+
+    updateCompareCheckbox(element);
 }
 
 // Set up view toggle buttons

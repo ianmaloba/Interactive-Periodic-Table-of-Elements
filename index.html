@@ -6,9 +6,11 @@
     <title>Interactive Periodic Table of Elements</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/quiz.css">
     <link rel="stylesheet" href="css/element-styles.css">
     <link rel="stylesheet" href="css/visualizations.css">
     <link rel="stylesheet" href="css/navbar-footer.css">
+    <link rel="stylesheet" href="css/compare.css">
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
@@ -27,6 +29,7 @@
             <ul class="navbar-menu" id="navbar-menu">
                 <li><a href="#" class="modal-trigger" data-modal="about-modal">About</a></li>
                 <li><a href="#" class="modal-trigger" data-modal="help-modal">Help</a></li>
+                <li><a href="#" class="modal-trigger" id="quiz-button">Quiz</a></li>
                 <li><a href="#" class="modal-trigger" data-modal="share-modal">Share</a></li>
                 <li><a href="#" class="theme-toggle" id="theme-toggle">🌙 / ☀️</a></li>
             </ul>
@@ -90,6 +93,11 @@
             </div>
         </div>
 
+        <div class="search-bar">
+            <input type="text" id="element-search" placeholder="Search elements...">
+            <div class="search-results" id="search-results"></div>
+        </div>
+
         <div class="gradient-legend" id="gradient-legend">
             <h3 id="gradient-title">Electronegativity</h3>
             <div class="gradient-bar"></div>
@@ -101,12 +109,35 @@
 
         <div id="periodic-table"></div>
 
+        <div id="compare-container" class="compare-container">
+            <div class="compare-header">
+                <h2>Element Comparison</h2>
+                <button id="close-compare" class="close-compare">×</button>
+            </div>
+            <div class="compare-elements" id="compare-elements">
+                <!-- Elements will be added here dynamically -->
+            </div>
+            <div class="compare-empty-message" id="compare-empty-message">
+                <p>Select elements to compare by right-clicking on them in the periodic table</p>
+                <p>or by using the checkboxes in the element details panel.</p>
+            </div>
+            <div class="compare-controls">
+                <button id="clear-compare" class="clear-compare">Clear All</button>
+            </div>
+        </div>
+
         <div id="element-details">
             <div class="detail-header">
                 <div class="detail-symbol" id="detail-symbol-box">H</div>
                 <div class="detail-title">
                     <h2 id="detail-name">Hydrogen</h2>
                     <p id="detail-category">Nonmetal</p>
+                </div>
+                <div class="detail-compare">
+                    <label for="compare-checkbox" class="compare-label">
+                        <input type="checkbox" id="compare-checkbox">
+                        Compare
+                    </label>
                 </div>
             </div>
 
@@ -369,11 +400,96 @@
         </div>
     </div>
 
+    <div class="modal" id="quiz-modal">
+        <div class="modal-content quiz-modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="quiz-start-screen" class="quiz-screen">
+                <h2>Periodic Table Quiz</h2>
+                <p>Test your knowledge of the elements!</p>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option">
+                        <label for="quiz-difficulty">Difficulty:</label>
+                        <select id="quiz-difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="quiz-option">
+                        <label for="quiz-category">Category:</label>
+                        <select id="quiz-category">
+                            <option value="all" selected>All Categories</option>
+                            <option value="symbols">Element Symbols</option>
+                            <option value="properties">Element Properties</option>
+                            <option value="categories">Element Categories</option>
+                            <option value="electron-config">Electron Configuration</option>
+                        </select>
+                    </div>
+                    
+                    <div class="quiz-option">
+                        <label for="quiz-questions">Number of Questions:</label>
+                        <select id="quiz-questions">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="start-quiz-button" class="quiz-start-button">Start Quiz</button>
+            </div>
+            
+            <div id="quiz-question-screen" class="quiz-screen" style="display: none;">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-text">Question <span id="current-question">1</span> of <span id="total-questions">10</span></div>
+                    <div class="quiz-progress-bar">
+                        <div id="progress-bar-fill" class="quiz-progress-bar-fill"></div>
+                    </div>
+                </div>
+                
+                <div id="quiz-question" class="quiz-question"></div>
+                
+                <div id="quiz-options" class="quiz-answer-options"></div>
+                
+                <div class="quiz-navigation">
+                    <button id="skip-question" class="quiz-button quiz-skip">Skip</button>
+                    <button id="next-question" class="quiz-button quiz-next" disabled>Next</button>
+                </div>
+            </div>
+            
+            <div id="quiz-results-screen" class="quiz-screen" style="display: none;">
+                <h2>Quiz Results</h2>
+                
+                <div class="quiz-score">
+                    <div class="score-circle">
+                        <span id="quiz-score">0</span>/<span id="quiz-total">10</span>
+                    </div>
+                    <div id="quiz-percentage">0%</div>
+                </div>
+                
+                <div id="quiz-feedback" class="quiz-feedback"></div>
+                
+                <div class="quiz-summary" id="quiz-summary"></div>
+                
+                <div class="quiz-actions">
+                    <button id="restart-quiz" class="quiz-button">Restart Quiz</button>
+                    <button id="new-quiz" class="quiz-button">New Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Overlay -->
     <div class="modal-overlay" id="modal-overlay"></div>
 
     <!-- JS files -->
     <script src="js/navbar-modal.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/compare.js"></script>
     <script src="js/3d-model.js"></script>
     <script src="js/reactions.js"></script>
     <script src="js/elements-data.js"></script>
