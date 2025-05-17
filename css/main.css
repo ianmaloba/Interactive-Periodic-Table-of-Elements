@@ -792,3 +792,156 @@ html {
         min-height: 40px;
     }
 }
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .container {
+    background-color: #121212;
+}
+
+.dark-mode header h1 {
+    color: #f0f0f0;
+}
+
+.dark-mode header p {
+    color: #ccc;
+}
+
+.dark-mode .view-toggle button {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #ddd;
+}
+
+.dark-mode .view-toggle button.active {
+    background-color: #2196F3;
+    color: #fff;
+    border-color: #2196F3;
+}
+
+.dark-mode .element {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .element-inner {
+    color: #ddd;
+}
+
+.dark-mode .mass {
+    color: #aaa;
+}
+
+.dark-mode .legend-item {
+    color: #ddd;
+}
+
+.dark-mode #element-details {
+    background-color: #222;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .detail-title h2 {
+    color: #f0f0f0;
+}
+
+.dark-mode .detail-title p {
+    color: #aaa;
+}
+
+.dark-mode .detail-item {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .detail-item h3 {
+    color: #aaa;
+}
+
+.dark-mode .detail-item p {
+    color: #f0f0f0;
+}
+
+.dark-mode .tab {
+    color: #ddd;
+}
+
+.dark-mode .tab.active {
+    color: #2196F3;
+    border-bottom-color: #2196F3;
+}
+
+.dark-mode .visualization {
+    background-color: #2d2d2d;
+}
+
+.dark-mode #applications {
+    background-color: #2d2d2d;
+}
+
+.dark-mode #applications h3 {
+    color: #f0f0f0;
+}
+
+.dark-mode #applications-list li {
+    background-color: #333;
+}
+
+.dark-mode .tab-content h3 {
+    color: #f0f0f0;
+    border-bottom-color: #444;
+}
+
+.dark-mode .tab-content p {
+    color: #ccc;
+}
+
+.dark-mode #electron-config-detail, 
+.dark-mode #hybridization-detail, 
+.dark-mode #properties-detail {
+    background-color: #2d2d2d;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .gradient-legend {
+    background-color: #2d2d2d;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .modal {
+    background-color: #222;
+    color: #e0e0e0;
+}
+
+.dark-mode .modal h2 {
+    color: #2196F3;
+}
+
+.dark-mode .modal h3 {
+    color: #ccc;
+}
+
+.dark-mode .modal-close {
+    color: #aaa;
+}
+
+.dark-mode .modal-close:hover {
+    color: #fff;
+}
+
+.dark-mode .share-button {
+    background-color: #333;
+    color: #ddd;
+}
+
+.dark-mode .share-button:hover {
+    background-color: #444;
+}
+
+.dark-mode #share-url {
+    background-color: #333;
+    color: #ddd;
+    border-color: #444;
+}
