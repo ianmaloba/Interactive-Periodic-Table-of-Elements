@@ -253,3 +253,158 @@
         font-size: 1.3rem;
     }
 }
+
+/* Enhanced Compare Checkbox Styles */
+.detail-compare {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.compare-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: background-color 0.2s, color 0.2s;
+    user-select: none;
+}
+
+.compare-label:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+/* Custom checkbox styling */
+.compare-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    margin-right: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.compare-label input[type="checkbox"]:checked {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.compare-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.compare-label input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+.compare-label input[type="checkbox"]:hover {
+    border-color: #2196F3;
+}
+
+/* Right-click hint for compare */
+.compare-hint {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.detail-compare:hover .compare-hint {
+    display: block;
+    opacity: 1;
+}
+
+/* Visual indicator when element is in comparison */
+.element.in-comparison {
+    box-shadow: 0 0 0 2px #2196F3, 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.element.in-comparison:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px #2196F3, 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode support */
+.dark-mode .compare-label {
+    color: #aaa;
+}
+
+.dark-mode .compare-label:hover {
+    background-color: rgba(33, 150, 243, 0.2);
+    color: #64B5F6;
+}
+
+.dark-mode .compare-label input[type="checkbox"] {
+    background-color: #333;
+    border-color: #555;
+}
+
+.dark-mode .compare-label input[type="checkbox"]:checked {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.dark-mode .compare-label input[type="checkbox"]:hover {
+    border-color: #64B5F6;
+}
+
+.dark-mode .compare-hint {
+    background-color: #222;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .detail-compare {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .compare-label {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .compare-label input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .compare-label input[type="checkbox"]:checked::after {
+        left: 4px;
+        top: 1px;
+        width: 4px;
+        height: 9px;
+    }
+}

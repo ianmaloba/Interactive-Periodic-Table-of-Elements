@@ -4,42 +4,72 @@ let contextMenu = null;
 
 // Initialize comparison feature
 function initializeComparison() {
-    // Add element context menu (right-click)
-    setupElementContextMenu();
+    console.log("Initializing comparison feature");
+    
+    // Create context menu if it doesn't exist
+    if (!contextMenu) {
+        contextMenu = document.createElement('div');
+        contextMenu.classList.add('context-menu');
+        contextMenu.style.display = 'none';
+        document.body.appendChild(contextMenu);
+    }
     
     // Set up compare checkbox
     setupCompareCheckbox();
     
     // Set up comparison container controls
     setupCompareControls();
-}
-
-// Create and handle element context menu
-function setupElementContextMenu() {
-    // Create context menu
-    contextMenu = document.createElement('div');
-    contextMenu.classList.add('context-menu');
-    contextMenu.style.display = 'none';
-    document.body.appendChild(contextMenu);
     
-    // Add event listeners to elements for context menu
-    document.querySelectorAll('.element').forEach(elementDiv => {
-        elementDiv.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            
-            const atomicNumber = parseInt(this.dataset.atomicNumber);
-            const element = elements.find(el => el.number === atomicNumber);
-            
-            if (element) {
-                showContextMenu(e.pageX, e.pageY, element);
+    // Add direct event listener to the periodic table for delegation
+    const periodicTable = document.getElementById('periodic-table');
+    if (periodicTable) {
+        // Remove any existing handlers first to avoid duplicates
+        periodicTable.removeEventListener('contextmenu', handleTableContextMenu);
+        periodicTable.addEventListener('contextmenu', handleTableContextMenu);
+        console.log("Added context menu handler to periodic table");
+    } else {
+        console.log("Periodic table not found, will try again after delay");
+        // Try again after a short delay
+        setTimeout(function() {
+            const periodicTable = document.getElementById('periodic-table');
+            if (periodicTable) {
+                periodicTable.removeEventListener('contextmenu', handleTableContextMenu);
+                periodicTable.addEventListener('contextmenu', handleTableContextMenu);
+                console.log("Added context menu handler to periodic table (delayed)");
+            } else {
+                console.error("Periodic table element not found even after delay");
             }
-        });
-    });
+        }, 1000);
+    }
     
     // Hide context menu when clicking elsewhere
     document.addEventListener('click', function() {
-        contextMenu.style.display = 'none';
+        if (contextMenu) {
+            contextMenu.style.display = 'none';
+        }
     });
+    
+    // Check if we have any elements to compare from a previous session
+    updateAllElementVisualIndicators();
+}
+
+// Handle context menu on the table using event delegation
+function handleTableContextMenu(e) {
+    // Check if the clicked element is an element or inside an element
+    const elementDiv = e.target.closest('.element');
+    
+    if (elementDiv) {
+        // Found an element - prevent default browser context menu
+        e.preventDefault();
+        
+        const atomicNumber = parseInt(elementDiv.dataset.atomicNumber);
+        const element = elements.find(el => el.number === atomicNumber);
+        
+        if (element) {
+            showContextMenu(e.pageX, e.pageY, element);
+            console.log(`Context menu shown for element ${element.name}`);
+        }
+    }
 }
 
 // Show the context menu for an element
@@ -85,13 +115,15 @@ function showContextMenu(x, y, element) {
     contextMenu.style.top = `${y}px`;
     
     // Adjust position if menu is too close to the edge
-    const menuRect = contextMenu.getBoundingClientRect();
-    if (menuRect.right > window.innerWidth) {
-        contextMenu.style.left = `${x - menuRect.width}px`;
-    }
-    if (menuRect.bottom > window.innerHeight) {
-        contextMenu.style.top = `${y - menuRect.height}px`;
-    }
+    setTimeout(() => {
+        const menuRect = contextMenu.getBoundingClientRect();
+        if (menuRect.right > window.innerWidth) {
+            contextMenu.style.left = `${x - menuRect.width}px`;
+        }
+        if (menuRect.bottom > window.innerHeight) {
+            contextMenu.style.top = `${y - menuRect.height}px`;
+        }
+    }, 0);
     
     contextMenu.style.display = 'block';
 }
@@ -134,14 +166,7 @@ function setupCompareControls() {
     const clearCompare = document.getElementById('clear-compare');
     if (clearCompare) {
         clearCompare.addEventListener('click', function() {
-            elementsToCompare = [];
-            updateComparisonView();
-            
-            // Uncheck the compare checkbox if it's checked
-            const compareCheckbox = document.getElementById('compare-checkbox');
-            if (compareCheckbox && compareCheckbox.checked) {
-                compareCheckbox.checked = false;
-            }
+            clearAllComparisons();
         });
     }
 }
@@ -167,6 +192,12 @@ function addElementToComparison(element) {
                 compareCheckbox.checked = true;
             }
         }
+        
+        // Add visual indicator to the element in the table
+        const elementDiv = document.querySelector(`.element[data-atomic-number="${element.number}"]`);
+        if (elementDiv) {
+            elementDiv.classList.add('in-comparison');
+        }
     }
 }
 
@@ -183,10 +214,56 @@ function removeElementFromComparison(element) {
             compareCheckbox.checked = false;
         }
     }
+    
+    // Remove visual indicator from the element in the table
+    const elementDiv = document.querySelector(`.element[data-atomic-number="${element.number}"]`);
+    if (elementDiv) {
+        elementDiv.classList.remove('in-comparison');
+    }
+}
+
+// Clear all comparisons
+function clearAllComparisons() {
+    // Remove visual indicators from all elements
+    elementsToCompare.forEach(element => {
+        const elementDiv = document.querySelector(`.element[data-atomic-number="${element.number}"]`);
+        if (elementDiv) {
+            elementDiv.classList.remove('in-comparison');
+        }
+    });
+    
+    // Clear the array
+    elementsToCompare = [];
+    updateComparisonView();
+    
+    // Uncheck the compare checkbox if it's checked
+    const compareCheckbox = document.getElementById('compare-checkbox');
+    if (compareCheckbox && compareCheckbox.checked) {
+        compareCheckbox.checked = false;
+    }
+}
+
+// Update all element visual indicators
+function updateAllElementVisualIndicators() {
+    // First remove all in-comparison classes
+    document.querySelectorAll('.element.in-comparison').forEach(el => {
+        el.classList.remove('in-comparison');
+    });
+    
+    // Then add them back for elements that should have them
+    elementsToCompare.forEach(element => {
+        const elementDiv = document.querySelector(`.element[data-atomic-number="${element.number}"]`);
+        if (elementDiv) {
+            elementDiv.classList.add('in-comparison');
+        }
+    });
 }
 
 // Update the comparison view
 function updateComparisonView() {
+    // First ensure all visual indicators are correct
+    updateAllElementVisualIndicators();
+    
     const compareContainer = document.getElementById('compare-container');
     const compareElements = document.getElementById('compare-elements');
     const emptyMessage = document.getElementById('compare-empty-message');
@@ -278,7 +355,7 @@ function updateComparisonView() {
     });
 }
 
-// Update the showElementDetails function to update compare checkbox state
+// Update compare checkbox state
 function updateCompareCheckbox(element) {
     const compareCheckbox = document.getElementById('compare-checkbox');
     if (compareCheckbox) {
@@ -288,5 +365,6 @@ function updateCompareCheckbox(element) {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded, initializing comparison feature");
     initializeComparison();
 });

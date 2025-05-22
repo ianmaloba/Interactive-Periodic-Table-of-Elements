@@ -31,9 +31,14 @@ function showElementDetails(element) {
     updateReactionsTab(element);
     
     // Update the 3D model if the tab is active
-    const is3DTabActive = document.querySelector('.tab[data-tab="3d-model"]').classList.contains('active');
-    if (is3DTabActive) {
-        update3DModel(element);
+    try {
+        const is3DTabActive = document.querySelector('.tab[data-tab="3d-model"]')?.classList.contains('active');
+        if (is3DTabActive && element && window.periodicTableApp?.threeDFunctions?.update3DModel) {
+            console.log("Updating 3D model for element:", element.name);
+            window.periodicTableApp.threeDFunctions.update3DModel(element);
+        }
+    } catch (error) {
+        console.error("Error in showElementDetails 3D update:", error);
     }
 
     updateCompareCheckbox(element);

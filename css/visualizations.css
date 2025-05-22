@@ -536,9 +536,8 @@
 
 /* Reactions tab styling */
 .reactions-container {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    padding: 0;
+    background-color: transparent;
     margin-bottom: 20px;
 }
 
@@ -549,17 +548,18 @@
     margin-bottom: 15px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .reaction-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 .reaction-header {
     background-color: #2196F3;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 15px;
     font-weight: bold;
     font-size: 1.1rem;
 }
@@ -572,53 +572,68 @@
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 12px;
     background-color: #f5f5f5;
     border-radius: 5px;
     overflow-x: auto;
+    line-height: 1.8;
 }
 
 .reaction-description {
-    color: #555;
+    color: #333;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
 .reaction-conditions {
     background-color: #f5f5f5;
-    padding: 10px;
+    padding: 12px 15px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .reaction-conditions h4 {
     margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: #666;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #444;
 }
 
 .reaction-conditions ul {
     margin: 0;
     padding-left: 20px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+}
+
+.reaction-conditions li {
+    margin-bottom: 5px;
 }
 
 .reaction-applications {
     font-style: italic;
-    color: #666;
-    font-size: 0.9rem;
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 /* Reaction elements styling */
-.element-symbol {
-    font-weight: bold;
-    color: #2196F3;
+.reaction-state {
+    font-size: 0.7em;
+    font-style: italic;
+    color: #666;
 }
 
 .reaction-arrow {
     margin: 0 10px;
-    color: #555;
+    color: #2196F3;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.reaction-equilibrium {
+    letter-spacing: -2px;
+    margin: 0 10px;
 }
 
 .reaction-plus {
@@ -626,74 +641,254 @@
     color: #555;
 }
 
-.reaction-state {
-    font-size: 0.8em;
-    vertical-align: sub;
+/* No reactions message */
+.no-reactions {
+    text-align: center;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
     color: #666;
+    margin-bottom: 15px;
+}
+
+.no-reactions p {
+    margin-bottom: 12px;
+}
+
+.no-reactions ul {
+    text-align: left;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+/* Reaction type badge */
+.reaction-type-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+/* Filters for reactions */
+.reaction-filters {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.reaction-filters h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
+    flex: 0 0 100%;
+    margin-bottom: 5px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: #555;
+    white-space: nowrap;
+}
+
+.filter-group select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 0.9rem;
+}
+
+.reset-filters-btn {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    margin-left: auto;
+}
+
+.reset-filters-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.reaction-count {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: -5px;
+    margin-bottom: 15px;
 }
 
 /* Dark mode support */
-.dark-mode .reactions-container {
-    background-color: #2d2d2d;
-}
-
 .dark-mode .reaction-card {
     background-color: #333;
 }
 
+.dark-mode .reaction-header {
+    background-color: #1976D2;
+}
+
 .dark-mode .reaction-equation {
-    background-color: #222;
-    color: #ddd;
+    background-color: #3a3a3a;
+    color: #eee;
 }
 
 .dark-mode .reaction-description {
-    color: #ccc;
+    color: #ddd;
 }
 
 .dark-mode .reaction-conditions {
-    background-color: #222;
+    background-color: #3a3a3a;
 }
 
 .dark-mode .reaction-conditions h4 {
-    color: #aaa;
+    color: #bbb;
 }
 
 .dark-mode .reaction-applications {
+    color: #bbb;
+}
+
+.dark-mode .reaction-arrow {
+    color: #64B5F6;
+}
+
+.dark-mode .reaction-plus {
     color: #aaa;
 }
 
-/* Responsive styles for reactions */
+.dark-mode .no-reactions {
+    background-color: #3a3a3a;
+    color: #bbb;
+}
+
+.dark-mode .reaction-filters {
+    background-color: #3a3a3a;
+}
+
+.dark-mode .reaction-filters h4 {
+    color: #bbb;
+}
+
+.dark-mode .filter-group label {
+    color: #aaa;
+}
+
+.dark-mode .filter-group select {
+    background-color: #444;
+    border-color: #555;
+    color: #eee;
+}
+
+.dark-mode .reset-filters-btn {
+    background-color: #444;
+    border-color: #555;
+    color: #eee;
+}
+
+.dark-mode .reset-filters-btn:hover {
+    background-color: #555;
+}
+
+.dark-mode .reaction-count {
+    color: #aaa;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
     .reaction-equation {
         font-size: 1rem;
-        padding: 8px;
+        padding: 10px;
     }
     
     .reaction-header {
         font-size: 1rem;
-        padding: 8px 12px;
+        padding: 10px 15px;
     }
     
     .reaction-body {
         padding: 12px;
+    }
+    
+    .reaction-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-group {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .filter-group select {
+        width: 100%;
+    }
+    
+    .reset-filters-btn {
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    
+    .reaction-type-badge {
+        top: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+        padding: 3px 7px;
     }
 }
 
 @media (max-width: 480px) {
     .reaction-equation {
         font-size: 0.9rem;
+        padding: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .reaction-header {
+        font-size: 0.95rem;
+        padding: 8px 12px;
+    }
+    
+    .reaction-body {
+        padding: 10px;
     }
     
     .reaction-conditions {
-        padding: 8px;
+        padding: 10px;
     }
     
     .reaction-conditions h4 {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
     
     .reaction-conditions ul {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        padding-left: 15px;
+    }
+    
+    .reaction-applications {
+        font-size: 0.85rem;
     }
 }
 
@@ -705,6 +900,15 @@
     overflow: hidden;
     border-radius: 8px;
     background: radial-gradient(circle, #2c3e50, #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.model-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .model-controls {
@@ -765,6 +969,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+    z-index: 5;
 }
 
 .loading-spinner {
@@ -815,6 +1020,7 @@
     font-size: 0.8rem;
     pointer-events: none;
     opacity: 0.8;
+    z-index: 10;
 }
 
 /* Dark mode support */

@@ -11,16 +11,48 @@
     <link rel="stylesheet" href="css/visualizations.css">
     <link rel="stylesheet" href="css/navbar-footer.css">
     <link rel="stylesheet" href="css/compare.css">
+
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                <a href="#" id="home-link">PeriodicTable.io</a>
-            </div>
+                <div class="navbar-logo">
+                    <a href="#" id="home-link">
+                        <div class="site-logo">
+                            <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Main element box -->
+                                <rect x="1" y="1" width="30" height="30" rx="3" ry="3" fill="#1976D2" stroke="#ffffff" stroke-width="1"/>
+                                
+                                <!-- Element symbol -->
+                                <text x="16" y="18" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="white" text-anchor="middle">Pt</text>
+                                
+                                <!-- Atomic number -->
+                                <text x="5" y="8" font-family="Arial, sans-serif" font-size="6" fill="white">78</text>
+                                
+                                <!-- Electron orbits -->
+                                <circle cx="16" cy="16" r="13" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.7" stroke-dasharray="1,1"/>
+                                <circle cx="16" cy="16" r="9" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.7" stroke-dasharray="1,1"/>
+                                
+                                <!-- Electrons -->
+                                <circle cx="16" cy="3" r="1.2" fill="white"/>
+                                <circle cx="29" cy="16" r="1.2" fill="white"/>
+                                <circle cx="16" cy="29" r="1.2" fill="white"/>
+                                <circle cx="3" cy="16" r="1.2" fill="white"/>
+                            </svg>
+                        </div>
+                        <span>PeriodicTable</span>
+                    </a>
+                </div>            </div>
             <button class="navbar-toggle" id="navbar-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -31,14 +63,31 @@
                 <li><a href="#" class="modal-trigger" data-modal="help-modal">Help</a></li>
                 <li><a href="#" class="modal-trigger" id="quiz-button">Quiz</a></li>
                 <li><a href="#" class="modal-trigger" data-modal="share-modal">Share</a></li>
-                <li><a href="#" class="theme-toggle" id="theme-toggle">🌙 / ☀️</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-wrapper" aria-label="Toggle dark mode">
+                        <svg class="theme-icon dark-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <svg class="theme-icon light-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
     <div class="container">
         <header>
-            <h1>Interactive Periodic Table of Elements</h1>
-            <p>Click on elements to explore their properties and electron configurations</p>
+            <h1>Interactive <span>Periodic Table</span> of Elements</h1>
+            <p>Click on elements to explore their properties</p>
         </header>
 
         <div class="controls">
@@ -137,6 +186,7 @@
                     <label for="compare-checkbox" class="compare-label">
                         <input type="checkbox" id="compare-checkbox">
                         Compare
+                        <div class="compare-hint">Pro tip: You can also right-click elements in the table</div>
                     </label>
                 </div>
             </div>
@@ -224,7 +274,7 @@
 
             <div class="tab-content" id="3d-model">
                 <div class="visualization">
-                    <div id="3d-container" class="model-container">
+                    <div id="3d-container" class="model-container" style="width: 100%; height: 100%; min-height: 280px;">
                         <!-- 3D visualization will be rendered here -->
                     </div>
                 </div>
@@ -261,16 +311,16 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-        <div class="container">
+        <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>PeriodicTable.io</h3>
+                    <h3>PeriodicTable</h3>
                     <p>The most interactive periodic table of elements on the web.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Email: <a href="mailto:info@periodictable.io">info@periodictable.io</a></p>
-                    <p>Twitter: <a href="https://twitter.com/periodictableio" target="_blank">@periodictableio</a></p>
+                    <p>Email: <a href="mailto:info.periodictable@ianmaloba.com">info.periodictable@ianmaloba.com</a></p>
+                    <p>Twitter: <a href="https://twitter.com/periodictable" target="_blank">@periodictable</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Resources</h3>
@@ -282,7 +332,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 PeriodicTable.io. All rights reserved.</p>
+                <p>&copy; 2025 PeriodicTable. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -291,55 +341,139 @@
     <div class="modal" id="about-modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h2>About PeriodicTable.io</h2>
-            <p>PeriodicTable.io is an interactive web application designed to make learning about chemical elements engaging and accessible.</p>
-            <p>Features include:</p>
+            <h2>About PeriodicTable</h2>
+            <p>PeriodicTable is an advanced, interactive web application designed to make learning about chemical elements engaging, accessible, and comprehensive.</p>
+            
+            <h3>Features</h3>
             <ul>
-                <li>Complete information on all 118 elements</li>
-                <li>Visual representations of atomic structure</li>
-                <li>Interactive hybridization models</li>
-                <li>Property comparisons</li>
-                <li>Practical applications for each element</li>
-                <li>Responsive design for all devices</li>
+                <li><strong>Complete Element Data:</strong> Detailed information on all 118 elements in the periodic table</li>
+                <li><strong>Multiple Visualization Modes:</strong> View elements by category, electronegativity, atomic radius, or ionization energy</li>
+                <li><strong>Interactive 3D Models:</strong> Explore atomic structure, common molecules, and crystal structures in 3D</li>
+                <li><strong>Atomic Structure Visualization:</strong> See electron shells and configuration</li>
+                <li><strong>Orbital Hybridization:</strong> Interactive visualization of orbital hybridization patterns</li>
+                <li><strong>Chemical Reactions:</strong> View common reactions for each element</li>
+                <li><strong>Element Comparison:</strong> Compare up to 4 elements side by side</li>
+                <li><strong>Interactive Quiz:</strong> Test your knowledge with customizable quizzes</li>
+                <li><strong>Smart Search:</strong> Quickly find elements by name, symbol, number, or property</li>
+                <li><strong>Dark Mode:</strong> Toggle between light and dark themes for comfortable viewing</li>
+                <li><strong>Responsive Design:</strong> Works seamlessly on desktop, tablet, and mobile devices</li>
             </ul>
-            <p>This application is designed for students, educators, and anyone curious about chemistry and the elements that make up our world.</p>
+            
+            <h3>Target Audience</h3>
+            <p>This application is designed for:</p>
+            <ul>
+                <li>Students learning chemistry at all levels</li>
+                <li>Educators teaching the periodic table and chemical concepts</li>
+                <li>Researchers needing quick reference to element properties</li>
+                <li>Chemistry enthusiasts exploring the fascinating world of elements</li>
+                <li>Anyone curious about the building blocks of our physical world</li>
+            </ul>
+            
+            <h3>Technology</h3>
+            <p>PeriodicTable is built using modern web technologies including HTML5, CSS3, JavaScript, Three.js for 3D visualizations, and GSAP for animations, ensuring smooth performance across all devices and browsers.</p>
+            
+            <h3>Data Sources</h3>
+            <p>Element data is compiled from reliable scientific sources including IUPAC, NIST, and academic publications to ensure accuracy and completeness.</p>
         </div>
     </div>
 
     <div class="modal" id="help-modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h2>How to Use PeriodicTable.io</h2>
+            <h2>How to Use PeriodicTable</h2>
+            
             <h3>Basic Navigation</h3>
-            <p>Click on any element in the periodic table to view detailed information about it.</p>
+            <p>Click on any element in the periodic table to view detailed information in the panel below. The panel contains various tabs showing different aspects of the selected element.</p>
+            
+            <h3>Search Functionality</h3>
+            <p>Use the search bar at the top of the page to quickly find elements by:</p>
+            <ul>
+                <li>Element name (e.g., "Carbon")</li>
+                <li>Symbol (e.g., "Fe")</li>
+                <li>Atomic number (e.g., "6")</li>
+                <li>Category (e.g., "Noble gas")</li>
+            </ul>
+            <p>Simply start typing and matching elements will appear in a dropdown. Click on any result to show its details.</p>
             
             <h3>View Options</h3>
-            <p>Use the buttons above the table to switch between different views:</p>
+            <p>Use the buttons above the table to switch between different visualization modes:</p>
             <ul>
-                <li><strong>Standard View:</strong> Shows elements colored by their category</li>
-                <li><strong>Electronegativity:</strong> Colors elements based on their electronegativity values</li>
-                <li><strong>Atomic Radius:</strong> Colors elements based on their atomic radius</li>
-                <li><strong>Ionization Energy:</strong> Colors elements based on their first ionization energy</li>
+                <li><strong>Standard View:</strong> Elements are colored by their category (metals, nonmetals, etc.)</li>
+                <li><strong>Electronegativity:</strong> Elements are colored based on their electronegativity values, with the value displayed</li>
+                <li><strong>Atomic Radius:</strong> Elements are colored based on their atomic radius in picometers</li>
+                <li><strong>Ionization Energy:</strong> Elements are colored based on their first ionization energy in electron volts</li>
+            </ul>
+            <p>In property views, hover over elements to see their specific values.</p>
+            
+            <h3>Element Detail Tabs</h3>
+            <p>When you select an element, the detail panel offers several tabs:</p>
+            <ul>
+                <li><strong>Atomic Structure:</strong> Visualization of the atom's electron shell configuration</li>
+                <li><strong>Hybridization:</strong> Shows orbital hybridization patterns for the element</li>
+                <li><strong>Properties:</strong> Displays a chart of key physical and chemical properties</li>
+                <li><strong>Reactions:</strong> Lists common chemical reactions involving the element</li>
+                <li><strong>3D Model:</strong> Interactive 3D visualizations with three modes:
+                    <ul>
+                        <li>Atomic Model: 3D representation of the atom</li>
+                        <li>Common Molecule: 3D model of a molecule containing the element</li>
+                        <li>Crystal Structure: 3D visualization of the element's crystal lattice</li>
+                    </ul>
+                </li>
+                <li><strong>Applications:</strong> Practical uses and applications of the element</li>
             </ul>
             
-            <h3>Element Details</h3>
-            <p>When you click on an element, you'll see various tabs with different information:</p>
+            <h3>3D Visualization Controls</h3>
+            <p>When viewing 3D models:</p>
             <ul>
-                <li><strong>Atomic Structure:</strong> Visual representation of the element's electron configuration</li>
-                <li><strong>Hybridization:</strong> Shows orbital hybridization patterns</li>
-                <li><strong>Properties:</strong> Displays key physical and chemical properties</li>
-                <li><strong>Applications:</strong> Lists common uses of the element</li>
+                <li><strong>Drag:</strong> Rotate the model</li>
+                <li><strong>Scroll/Pinch:</strong> Zoom in and out</li>
+                <li><strong>Right-click drag:</strong> Pan the view</li>
+                <li><strong>Pause/Resume Rotation:</strong> Stop or restart automatic rotation</li>
+                <li><strong>Reset View:</strong> Return to the default camera position</li>
+                <li><strong>Select Structure:</strong> Choose between atomic, molecular, or crystal views</li>
             </ul>
+            
+            <h3>Element Comparison</h3>
+            <p>Compare multiple elements side by side:</p>
+            <ul>
+                <li>Right-click on an element and select "Add to Comparison"</li>
+                <li>Or check the "Compare" checkbox in the element details panel</li>
+                <li>Compare up to 4 elements simultaneously</li>
+                <li>Remove elements from comparison by clicking the "×" on each element card</li>
+                <li>Use "Clear All" to reset the comparison</li>
+            </ul>
+            
+            <h3>Quiz Mode</h3>
+            <p>Test your knowledge of the periodic table:</p>
+            <ul>
+                <li>Click "Quiz" in the navigation bar to start</li>
+                <li>Customize quiz difficulty, category, and number of questions</li>
+                <li>Answer questions about element symbols, properties, categories, and electron configurations</li>
+                <li>View your score and detailed results at the end</li>
+                <li>Restart the quiz or create a new one with different settings</li>
+            </ul>
+            
+            <h3>Dark Mode</h3>
+            <p>Toggle between light and dark themes by clicking the "🌙 / ☀️" button in the top navigation bar. Your preference will be saved for future visits.</p>
             
             <h3>Mobile Usage Tips</h3>
-            <p>On smaller screens, you can scroll the periodic table by dragging. Use the horizontal scroll on tabs if all tabs don't fit on screen.</p>
+            <ul>
+                <li>On smaller screens, scroll horizontally to see all tabs</li>
+                <li>Use pinch gestures to zoom the periodic table</li>
+                <li>The menu is accessible via the hamburger icon in the top-right corner</li>
+                <li>Rotate your device to landscape orientation for a better view of the full periodic table</li>
+                <li>In 3D view, use one finger to rotate and two fingers to zoom</li>
+            </ul>
+            
+            <h3>Sharing</h3>
+            <p>Share PeriodicTable with others by clicking the "Share" button in the navigation menu. Share via social media, email, or copy a direct link to the page.</p>
         </div>
     </div>
 
     <div class="modal" id="share-modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h2>Share PeriodicTable.io</h2>
+            <h2>Share PeriodicTable</h2>
             <p>Share this interactive periodic table with friends, students, or colleagues:</p>
             
             <div class="share-buttons">
@@ -360,7 +494,7 @@
             <div class="share-link">
                 <label for="share-url">Direct Link:</label>
                 <div class="share-link-container">
-                    <input type="text" id="share-url" value="https://periodictable.io" readonly>
+                    <input type="text" id="share-url" value="https://periodic-table.ianmaloba.com/" readonly>
                     <button id="copy-link">Copy</button>
                 </div>
             </div>
@@ -371,13 +505,16 @@
         <div class="modal-content">
             <span class="modal-close">&times;</span>
             <h2>Privacy Policy</h2>
-            <p>This privacy policy outlines how PeriodicTable.io collects and handles information.</p>
+            <p>This privacy policy outlines how PeriodicTable collects and handles information.</p>
             
             <h3>Information We Collect</h3>
             <p>We collect minimal usage data to improve our service, including:</p>
             <ul>
                 <li>Anonymous usage statistics</li>
                 <li>Browser and device information</li>
+                <li>Feature interaction metrics</li>
+                <li>Quiz results (anonymized)</li>
+                <li>Theme preferences</li>
             </ul>
             
             <h3>How We Use Information</h3>
@@ -386,17 +523,48 @@
                 <li>Improve the functionality of our application</li>
                 <li>Fix bugs and technical issues</li>
                 <li>Understand how users interact with the periodic table</li>
+                <li>Enhance educational features based on quiz performance data</li>
+                <li>Optimize user experience across devices</li>
             </ul>
+            
+            <h3>Storage of Information</h3>
+            <p>PeriodicTable uses local storage on your device to save:</p>
+            <ul>
+                <li>Theme preference (light/dark mode)</li>
+                <li>Recently viewed elements</li>
+                <li>Quiz settings preferences</li>
+            </ul>
+            <p>These preferences are stored only on your device and are not transmitted to our servers.</p>
             
             <h3>Third-Party Services</h3>
             <p>We use the following third-party services:</p>
             <ul>
                 <li>Google Analytics for website analytics</li>
                 <li>GitHub Pages for hosting</li>
+                <li>CDN services for library delivery</li>
             </ul>
             
+            <h3>Data Protection</h3>
+            <p>We take appropriate measures to protect your data:</p>
+            <ul>
+                <li>We do not collect personally identifiable information</li>
+                <li>We use secure, encrypted connections (HTTPS)</li>
+                <li>We regularly update our security practices</li>
+            </ul>
+            
+            <h3>User Rights</h3>
+            <p>As a user, you have the right to:</p>
+            <ul>
+                <li>Clear locally stored data from your browser settings</li>
+                <li>Opt out of analytics collection via browser settings or plugins</li>
+                <li>Request information about what data we collect</li>
+            </ul>
+            
+            <h3>Policy Updates</h3>
+            <p>We may update this privacy policy from time to time. Significant changes will be announced on our website.</p>
+            
             <h3>Contact Us</h3>
-            <p>If you have any questions about our privacy policy, please contact us at <a href="mailto:privacy@periodictable.io">privacy@periodictable.io</a>.</p>
+            <p>If you have any questions about our privacy policy, please contact us at <a href="mailto:info.periodictable@ianmaloba.com">info.periodictable@ianmaloba.com</a>.</p>
         </div>
     </div>
 
@@ -486,11 +654,14 @@
     <div class="modal-overlay" id="modal-overlay"></div>
 
     <!-- JS files -->
+    <script src="js/shared-functions.js"></script>
     <script src="js/navbar-modal.js"></script>
     <script src="js/search.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/compare.js"></script>
+    <script src="js/3d-model-data.js"></script>
     <script src="js/3d-model.js"></script>
+    <script src="js/reactions-data.js"></script>
     <script src="js/reactions.js"></script>
     <script src="js/elements-data.js"></script>
     <script src="js/table-builder.js"></script>

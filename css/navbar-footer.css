@@ -79,6 +79,12 @@
     margin-top: 50px;
 }
 
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 .footer-content {
     display: flex;
     flex-wrap: wrap;
@@ -366,5 +372,117 @@
     
     .modal-content {
         padding: 15px;
+    }
+}
+
+/* Enhanced navbar styles */
+.navbar {
+    background-color: #1976D2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-menu li {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Dark mode navbar */
+.dark-mode .navbar {
+    background-color: #0d47a1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .navbar-logo a {
+    color: #90CAF9;
+}
+
+.dark-mode .navbar-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .navbar-toggle .bar {
+    background-color: #90CAF9;
+}
+
+.dark-mode #theme-toggle {
+    color: white;
+}
+
+/* Mobile menu in dark mode */
+.dark-mode .navbar-menu {
+    background-color: #0d47a1;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .navbar-menu a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Logo Styling */
+.navbar-logo a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.site-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.site-logo svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo a:hover .site-logo svg {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.navbar-logo a:hover {
+    opacity: 0.9;
+}
+
+/* Dark mode adjustments for logo */
+.dark-mode .site-logo svg rect {
+    fill: #64B5F6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .navbar-logo a span {
+        font-size: 1.2rem;
+    }
+    
+    .site-logo {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .site-logo svg {
+        width: 20px;
+        height: 20px;
     }
 }

@@ -21,7 +21,6 @@
 
 body {
     background-color: #f5f5f5;
-    padding: 20px;
 }
 
 .container {
@@ -1077,4 +1076,364 @@ html {
 .highlight-pulse {
     animation: highlight-pulse 1s ease-in-out;
     z-index: 10;
+}
+
+/* Modern Header Styling */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem 1rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.15) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
+    z-index: -1;
+}
+
+h1 {
+    font-size: 2.00rem;
+    margin-bottom: 1rem;
+    color: #1565C0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #1565C0, #2196F3);
+    border-radius: 2px;
+}
+
+header p {
+    font-size: 1.25rem;
+    color: #546E7A;
+    max-width: 600px;
+    margin: 1.25rem auto 0;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Modern View Toggle Buttons */
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.view-toggle button {
+    padding: 0.7rem 1.2rem;
+    background-color: #ffffff;
+    color: #455A64;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-toggle button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, #1976D2, #2196F3);
+    transition: width 0.25s ease;
+    border-radius: 3px;
+}
+
+.view-toggle button:hover {
+    background-color: #f5f9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+}
+
+.view-toggle button:hover::before {
+    width: 100%;
+}
+
+.view-toggle button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.view-toggle button.active {
+    background-color: #1976D2;
+    color: white;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.view-toggle button.active::before {
+    width: 100%;
+    background: linear-gradient(90deg, #135799, #1976D2);
+}
+
+/* Dark Mode Styling */
+.dark-mode header {
+    background: linear-gradient(135deg, rgba(25, 118, 210, 0.15), rgba(25, 118, 210, 0.05));
+}
+
+.dark-mode header::before {
+    background-image: radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.2) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.15) 0%, transparent 50%);
+}
+
+.dark-mode h1 {
+    color: #64B5F6;
+}
+
+.dark-mode h1::after {
+    background: linear-gradient(90deg, #42A5F5, #90CAF9);
+}
+
+.dark-mode header p {
+    color: #B0BEC5;
+}
+
+.dark-mode .view-toggle button {
+    background-color: #2c2c2c;
+    color: #B0BEC5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .view-toggle button:hover {
+    background-color: #383838;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .view-toggle button::before {
+    background: linear-gradient(90deg, #42A5F5, #64B5F6);
+}
+
+.dark-mode .view-toggle button.active {
+    background-color: #1976D2;
+    color: white;
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+}
+
+.dark-mode .view-toggle button.active::before {
+    background: linear-gradient(90deg, #1565C0, #1976D2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    header p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .view-toggle {
+        justify-content: center;
+        padding: 0 0.5rem;
+    }
+    
+    .view-toggle button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        flex: 1 0 auto;
+        min-width: 120px;
+        max-width: 45%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h1::after {
+        width: 40px;
+        height: 3px;
+    }
+    
+    header p {
+        font-size: 0.95rem;
+    }
+    
+    .view-toggle button {
+        padding: 0.55rem 0.8rem;
+        font-size: 0.85rem;
+        min-width: 0;
+        max-width: none;
+        flex: 1 0 calc(50% - 0.5rem);
+    }
+}
+
+/* Animation for Header (Optional) */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 span {
+    background: linear-gradient(90deg, #1976D2, #2196F3, #0D47A1, #1976D2);
+    background-size: 300% 100%;
+    animation: gradientFlow 8s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 0 0.1em;
+}
+
+.dark-mode h1 span {
+    background: linear-gradient(90deg, #42A5F5, #90CAF9, #2196F3, #42A5F5);
+    background-size: 300% 100%;
+    animation: gradientFlow 8s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Standard view in dark mode */
+.dark-mode #periodic-table:not(.property-view) .element {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode #periodic-table:not(.property-view) .element:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode #periodic-table:not(.property-view) .element .name,
+.dark-mode #periodic-table:not(.property-view) .element .atomic-number {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode #periodic-table:not(.property-view) .element .mass {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Property views in dark mode */
+.dark-mode #periodic-table.property-view .element {
+    background-color: #333;
+}
+
+.dark-mode #periodic-table.property-view .atomic-number {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode #periodic-table.property-view .symbol {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode #periodic-table.property-view .value {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Gradient legend for property views in dark mode */
+.dark-mode .gradient-legend {
+    background-color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .gradient-legend h3 {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode .gradient-bar {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .gradient-labels {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Element cards in dark mode */
+.dark-mode .element-inner {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Theme Toggle Styling */
+.theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.theme-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.light-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+.dark-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+.dark-mode .light-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+.dark-mode .dark-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+#theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+}
+
+#theme-toggle:hover .theme-icon {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode #theme-toggle:hover .theme-icon {
+    color: rgba(255, 255, 255, 0.8);
 }

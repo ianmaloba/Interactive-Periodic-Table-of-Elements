@@ -92,6 +92,27 @@ function updateTableView(view) {
             valueElement.remove();
         });
     }
+    
+    // Hide element names when in Electronegativity view
+    if (view === 'electronegativity') {
+        document.querySelectorAll('.element .name').forEach(nameElement => {
+            nameElement.style.display = 'none';
+        });
+    }
+    
+    // Hide element names when in Atomic Radius view
+    if (view === 'atomic-radius') {
+        document.querySelectorAll('.element .name').forEach(nameElement => {
+            nameElement.style.display = 'none';
+        });
+    }
+    
+    // Hide element names when in Ionization Energy view
+    if (view === 'ionization-energy') {
+        document.querySelectorAll('.element .name').forEach(nameElement => {
+            nameElement.style.display = 'none';
+        });
+    }
         
     elementDivs.forEach(el => {
         const atomicNumber = parseInt(el.dataset.atomicNumber);
